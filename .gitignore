@@ -1,0 +1,6 @@
+__pycache__/
+.ipynb_checkpoints/
+.pytest_cache/
+dados/0_brutos/*.xlsx
+dados/1_processados/*.csv
+dados/2_consumo/*.xlsx

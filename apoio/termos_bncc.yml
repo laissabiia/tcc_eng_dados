@@ -1,0 +1,74 @@
+# Mapeamento dos termos e bigramas relevantes para os eixos da BNCC.
+versao: 4
+criterio: "descritor relevante no título e presença no texto título+resumo"
+
+eixos:
+  pensamento_computacional:
+    nome: "Pensamento Computacional"
+    termos:
+      - programacao
+      - computacional
+      - logica
+      - algoritmos
+      - scratch
+      - robotica
+      - computacao
+      - decomposicao
+      - generalizacao
+      - software
+    bigramas:
+      - pensamento computacional
+      - logica programacao
+      - aprendizagem programacao
+      - desenvolvimento pensamento
+      - robotica educacional
+      - computacao desplugada
+      - programacao computadores
+
+  mundo_digital:
+    nome: "Mundo Digital"
+    termos:
+      - informatica
+      - sistemas
+      - dados
+      - informacao
+      - computadores
+      - tecnologia
+      - tecnologias
+      - internet
+      - dispositivos
+      - redes
+    bigramas:
+      - sistemas informacao
+      - engenharia software
+      - jogos digitais
+      - dados digitais
+
+  cultura_digital:
+    nome: "Cultura Digital"
+    termos:
+      - inclusao
+      - seguranca
+      - responsabilidade
+      - etica
+      - cidadania
+      - autoria
+      - sociedade
+      - artefatos
+      - social
+      - tecnologico
+      - formacao
+      - utilizacao
+      - uso
+    bigramas:
+      - seguranca digital
+      - responsabilidade digital
+      - uso seguro
+      - cidadania digital
+      - tecnologia digital
+      - tecnologias digitais
+      - sociedade digital
+      - artefatos computacionais
+      - inclusao digital
+      - uso tecnologias
+      - informacao comunicacao

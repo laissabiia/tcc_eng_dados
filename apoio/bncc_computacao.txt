@@ -1,0 +1,42 @@
+# BNCC - Computação
+
+## Pensamento Computacional
+- Programação
+  - Tipos de dados
+  - Linguagem de programação
+- Estratégias de solução de problemas
+  - Decomposição
+  - Generalização
+  - Reuso
+- Algoritmos
+- Lógica computacional
+
+Habilidades associadas:
+- Construir e analisar soluções computacionais de problemas de diferentes áreas do conhecimento, de forma individual ou colaborativa, selecionando estruturas de dados adequadas.
+- Empregar diferentes estratégias da Computação, como decomposição, generalização e reúso, para construir soluções de problemas.
+
+## Mundo Digital
+- Armazenamento e transmissão de dados
+  - Fundamentos de transmissão de dados
+  - Gestão de dados
+- Sistemas distribuídos e internet
+  - Fundamentos de sistemas distribuídos
+  - Internet
+- Codificação da informação
+- Funcionamento de dispositivos computacionais
+- Sistema operacional
+
+Habilidades associadas:
+- Entender como os dados são armazenados, processados e transmitidos usando dispositivos computacionais, considerando aspectos da segurança cibernética.
+- Entender os fundamentos de sistemas distribuídos e da internet.
+
+## Cultura Digital
+- Segurança e responsabilidade no uso da tecnologia
+  - Tecnologia digital e sociedade
+  - Tecnologia digital e sustentabilidade
+- Uso de artefatos computacionais
+- Segurança e responsabilidade no uso da tecnologia
+
+Habilidades associadas:
+- Entender que as tecnologias devem ser utilizadas de maneira segura, ética e responsável, respeitando direitos autorais, de imagem e as leis vigentes.
+- Selecionar e utilizar tecnologias computacionais para se expressar e resolver problemas, analisando criticamente os diferentes impactos na sociedade.
