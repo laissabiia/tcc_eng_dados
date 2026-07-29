@@ -1,10 +1,14 @@
 """Funções simples compartilhadas pelos notebooks do TCC."""
 
+import random
 import re
 import unicodedata
+from pathlib import Path
 
+import matplotlib.pyplot as plt
 import pandas as pd
 import yaml
+from wordcloud import WordCloud
 
 
 def normalizar_nome_coluna(nome: object) -> str:
@@ -100,3 +104,72 @@ def encontrar_evidencias_bncc(
             }
 
     return evidencias
+
+
+def criar_paleta_unb() -> list[str]:
+    """Retornar a paleta de cores do estilo visual da UnB."""
+    return [
+        "#003366",
+        "#006633",
+        "#C89B3C",
+        "#A23B3B",
+        "#7A5A3A",
+    ]
+
+
+def cor_unb(word: str, font_size: int, position: tuple[float, float], orientation, random_state=None, **kwargs) -> str:
+    """Escolher uma cor da paleta UnB para a nuvem de palavras."""
+    return random.choice(criar_paleta_unb())
+
+
+def montar_frequencias_palavras(freq_df: pd.DataFrame, coluna: str, evento: str) -> dict[str, int]:
+    """Agrupar frequências por evento para gerar nuvens de palavras."""
+    return (
+        freq_df.loc[freq_df["evento"] == evento]
+        .groupby(coluna)["frequencia"]
+        .sum()
+        .sort_values(ascending=False)
+        .to_dict()
+    )
+
+
+def gerar_nuvem_palavras(
+    frequencias: dict[str, int],
+    caminho_saida: str | Path,
+    *,
+    width: int = 1400,
+    height: int = 850,
+    max_words: int = 80,
+    max_font_size: int = 170,
+    min_font_size: int = 12,
+    random_state: int = 42,
+) -> Path:
+    """Gerar uma imagem de nuvem de palavras e salvar em arquivo PNG."""
+    caminho_saida = Path(caminho_saida)
+    caminho_saida.parent.mkdir(parents=True, exist_ok=True)
+
+    wordcloud = WordCloud(
+        width=width,
+        height=height,
+        background_color=None,
+        mode="RGBA",
+        max_words=max_words,
+        collocations=False,
+        prefer_horizontal=0.92,
+        relative_scaling=0.25,
+        max_font_size=max_font_size,
+        min_font_size=min_font_size,
+        random_state=random_state,
+        margin=3,
+    ).generate_from_frequencies(frequencias)
+
+    wordcloud = wordcloud.recolor(color_func=cor_unb, random_state=random_state)
+
+    plt.figure(figsize=(12, 7))
+    plt.imshow(wordcloud, interpolation="bilinear")
+    plt.axis("off")
+    plt.tight_layout(pad=0)
+    plt.savefig(caminho_saida, transparent=True, dpi=300, bbox_inches="tight", pad_inches=0)
+    plt.close()
+
+    return caminho_saida

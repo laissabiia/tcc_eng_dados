@@ -1,6 +1,13 @@
 __pycache__/
 .ipynb_checkpoints/
 .pytest_cache/
+.venv/
+venv/
+.vscode/
+.idea/
+.DS_Store
+
 dados/0_brutos/*.xlsx
 dados/1_processados/*.csv
 dados/2_consumo/*.xlsx
+dados/2_consumo/imagens/*.png
