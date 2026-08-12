@@ -1,139 +1,137 @@
-# Análise de artigos do WIE e WEI em relação aos eixos da BNCC
+# 📚 Análise de artigos do WIE e WEI em relação aos eixos da BNCC
 
-Projeto acadêmico desenvolvido em notebooks para reunir, tratar e analisar os
-artigos publicados no WIE e no WEI. O fluxo identifica termos e bigramas
-relevantes nos títulos e utiliza os descritores selecionados para classificar
-os artigos em relação aos eixos da BNCC.
+Projeto acadêmico desenvolvido em notebooks para obter, tratar e analisar os
+artigos publicados no Workshop de Informática na Escola (WIE) e no Workshop
+sobre Educação em Computação (WEI). O fluxo identifica termos e expressões (bigramas)
+relevantes nos títulos e usa descritores selecionados para classificar os
+artigos nos eixos da BNCC Computação.
 
-## Organização
+## 🔄 Etapas do projeto
+
+1. coleta dos metadados dos artigos no portal SOL/SBC;
+2. consolidação e preparação dos dados;
+3. pré-processamento dos textos;
+4. análise de termos e bigramas dos títulos;
+5. classificação multirrótulo nos eixos da BNCC;
+6. preparação de tabelas para o Power BI;
+7. geração de nuvens de palavras por evento.
+
+## 📁 Estrutura do repositório
 
 ```text
 tcc_eng_dados/
 ├── apoio/
-│   ├── bncc_computacao.txt
 │   ├── funcoes.py
 │   └── termos_bncc.yml
 ├── dados/
-│   ├── 0_brutos/        # planilhas originais do WIE e do WEI
-│   ├── 1_processados/   # arquivos intermediários das etapas 1 a 4
-│   └── 2_consumo/       # planilhas finais para análise no Power BI
+│   ├── 0_brutos/        # planilhas obtidas do WIE e do WEI
+│   ├── 1_processados/   # arquivos intermediários em CSV
+│   └── 2_consumo/       # planilha e imagens para consumo e apresentação
 ├── notebooks/
+│   ├── 00_obtencao_dos_dados.ipynb
 │   ├── 01_preparacao_dos_dados.ipynb
 │   ├── 02_pre_processamento.ipynb
 │   ├── 03_analise_termos_bigramas.ipynb
 │   ├── 04_classificacao_bncc.ipynb
-│   └── 05_analise_dos_resultados.ipynb
+│   ├── 05_analise_dos_resultados.ipynb
+│   └── 06_geracao_imagens.ipynb
 ├── .gitignore
 ├── README.md
 └── requirements.txt
 ```
 
-- `apoio`: concentra as funções reutilizadas pelos notebooks, o texto de
-  referência da BNCC Computação e o arquivo YAML que relaciona descritores aos
-  eixos da BNCC;
-- `dados/0_brutos`: armazena as planilhas originais do WIE e do WEI, mantidas
-  sem alterações;
-- `dados/1_processados`: recebe os arquivos CSV produzidos ao longo da
-  preparação, do pré-processamento, da análise de termos e da classificação;
-- `dados/2_consumo`: reúne as planilhas XLSX consolidadas para consumo no Power
-  BI;
-- `notebooks`: contém o fluxo de processamento e análise, numerado conforme a
-  ordem em que deve ser executado;
-- `requirements.txt`: lista as dependências Python necessárias para executar o
-  projeto.
+As três pastas de `dados/` são criadas pelos notebooks quando necessário e
+não são versionadas. `apoio/funcoes.py` reúne funções de coleta, limpeza,
+classificação e visualização; `apoio/termos_bncc.yml` contém o vocabulário de
+descritores associado a cada eixo.
 
-## Ambiente
+## 🛠️ Requisitos e instalação
+
+- Python 3.10 ou superior;
+- acesso à internet para a coleta no portal SOL/SBC e para o primeiro download
+  das stopwords do NLTK.
+
+No PowerShell, a partir da raiz do projeto:
 
 ```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
 python -m nltk.downloader stopwords
 python -m jupyter lab
 ```
 
-## Ordem de execução
+Se a política de execução do PowerShell impedir a ativação do ambiente, os
+comandos também podem ser executados diretamente com
+`.\.venv\Scripts\python.exe`.
 
-1. `01_preparacao_dos_dados.ipynb`
-2. `02_pre_processamento.ipynb`
-3. `03_analise_termos_bigramas.ipynb`
-4. `04_classificacao_bncc.ipynb`
-5. `05_analise_dos_resultados.ipynb`
+## ▶️ Execução
 
-## 1. Preparação dos dados
+Abra os notebooks pelo JupyterLab e execute-os na ordem numérica, sempre a
+partir da raiz do repositório:
 
-Reúne todas as abas das planilhas WIE e WEI e preserva o evento, arquivo, aba
-e linha de origem. Nenhum registro é removido nessa etapa.
+1. `00_obtencao_dos_dados.ipynb` — coleta as edições do WIE e WEI entre 2007 e
+   2025 e gera planilhas anuais e consolidadas em `dados/0_brutos`;
+2. `01_preparacao_dos_dados.ipynb` — reúne as planilhas brutas, preservando a
+   origem de cada registro;
+3. `02_pre_processamento.ipynb` — normaliza os textos e separa registros
+   editoriais, pré-textuais e páginas de abertura;
+4. `03_analise_termos_bigramas.ipynb` — calcula termos e bigramas relevantes
+   nos títulos e suas frequências por ano e evento;
+5. `04_classificacao_bncc.ipynb` — classifica os artigos nos eixos Pensamento
+   Computacional, Mundo Digital e Cultura Digital;
+6. `05_analise_dos_resultados.ipynb` — organiza as tabelas analíticas e exporta
+   o modelo para o Power BI;
+7. `06_geracao_imagens.ipynb` — cria nuvens de termos e bigramas para WIE e
+   WEI.
 
-Saídas:
+O intervalo de anos e as URLs dos eventos podem ser alterados na seção de
+parâmetros do notebook `00`. Como a coleta consulta um serviço externo, o
+tempo de execução e a quantidade de registros podem variar. Se as planilhas
+brutas já existirem, é possível iniciar pelo notebook `01`.
 
-- `artigos_consolidados.csv`.
+## 📊 Principais saídas
 
-Resultado de referência: 2.126 registros, sendo 1.269 do WIE e 857 do WEI.
+### 📥 Dados brutos
 
-## 2. Pré-processamento
+O notebook `00` grava em `dados/0_brutos`:
 
-Separa elementos pré-textuais, editoriais e páginas de abertura. As colunas
-originais são preservadas. O texto usado nas análises é composto apenas por
-título e resumo.
+- planilhas anuais `wie_artigos_<ano>.xlsx` e `wei_artigos_<ano>.xlsx`;
+- consolidados `wie_artigos_consolidados.xlsx` e
+  `wei_artigos_consolidados.xlsx`.
 
-São criadas:
+### ⚙️ Dados processados
 
-- `titulo_limpo`, para a análise de termos e bigramas dos títulos;
-- `texto_original`, formado por título e resumo;
-- `texto_limpo`, usado para localizar os descritores da classificação.
+Os notebooks `01` a `04` gravam em `dados/1_processados`:
 
-Saídas:
+- `01_artigos_consolidados.csv`;
+- `02_artigos_pre_processados.csv`;
+- `03_termos_titulos.csv` e `03_bigramas_titulos.csv`;
+- `03_ranking_termos_titulos.csv` e
+  `03_ranking_bigramas_titulos.csv`;
+- `03_frequencia_termos_ano_evento.csv` e
+  `03_frequencia_bigramas_ano_evento.csv`;
+- `04_artigos_classificados_bncc.csv`;
+- `04_classificacoes_bncc.csv`.
 
-- `artigos_pre_processados.csv`;
-- `registros_removidos.csv`.
+Na análise de relevância, o notebook `03` usa frequência mínima equivalente a
+2% do corpus para termos e 1% para bigramas. As stopwords em português do NLTK
+e palavras com até dois caracteres são removidas.
 
-Resultado de referência: 2.110 artigos mantidos e 16 registros separados.
+### 📤 Arquivos para consumo
 
-## 3. Termos e bigramas relevantes
+Os notebooks `05` e `06` gravam em `dados/2_consumo`:
 
-Remove stopwords em português disponibilizadas pelo NLTK e palavras com até
-dois caracteres. A análise utiliza somente `titulo_limpo`.
+- `05_powerbi_bncc.xlsx`, com as tabelas para importação no Power BI;
+- `imagens/nuvem_termos_wie.png` e `imagens/nuvem_termos_wei.png`;
+- `imagens/nuvem_bigramas_wie.png` e `imagens/nuvem_bigramas_wei.png`.
 
-Critérios utilizados:
+## 🧭 Metodologia de classificação
 
-- termos: frequência mínima equivalente a 2% dos 2.110 artigos;
-- bigramas: frequência mínima equivalente a 1% dos 2.110 artigos.
-
-Isso corresponde a limites de 43 ocorrências para termos e 22 para bigramas.
-Foram encontrados 73 termos e 37 bigramas relevantes.
-
-Saídas:
-
-- `termos_titulos.csv`;
-- `bigramas_titulos.csv`;
-- `ranking_termos_titulos.csv`;
-- `ranking_bigramas_titulos.csv`;
-- `frequencia_termos_ano_evento.csv`;
-- `frequencia_bigramas_ano_evento.csv`.
-
-## 4. Classificação BNCC
-
-O arquivo `apoio/termos_bncc.yml` associa parte dos termos e bigramas
-relevantes aos eixos Pensamento Computacional, Mundo Digital e Cultura
-Digital. Somente descritores que aparecem nos rankings relevantes são
-ativados. A classificação procura esses descritores em `texto_limpo`, ou seja,
-no título e no resumo.
-
-A classificação é multirrótulo e registra separadamente termos e bigramas que
-justificaram cada eixo.
-
-Saídas:
-
-- `artigos_classificados_bncc.csv`;
-- `classificacoes_bncc.csv`;
-- `artigos_nao_classificados.csv`;
-- `resumo_classificacao_bncc.csv`;
-- `frequencia_descritores_bncc.csv`.
-
-## 5. Análise e Power BI
-
-⚠️ Em desenvolvimento.
-
-Arquivos gerados em `dados/2_consumo`:
-
-- `modelo_power_bi_bncc.xlsx`;
-- `resumos_power_bi_bncc.xlsx`.
+O vocabulário em `apoio/termos_bncc.yml` associa termos e bigramas aos eixos
+Pensamento Computacional, Mundo Digital e Cultura Digital. Apenas descritores
+presentes nos rankings relevantes são ativados. A busca considera palavras e
+expressões completas no texto normalizado do artigo, e um mesmo artigo pode
+ser associado a mais de um eixo. As evidências encontradas são mantidas na
+saída para permitir revisão.

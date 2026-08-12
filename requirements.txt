@@ -6,3 +6,6 @@ PyYAML>=6,<7
 nltk>=3.9,<4
 wordcloud>=1.9,<2
 matplotlib>=3.8,<4
+requests>=2.28,<3
+beautifulsoup4>=4.11,<5
+tqdm>=4.65,<5
