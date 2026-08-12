@@ -1,4 +1,5 @@
 __pycache__/
+*.py[cod]
 .ipynb_checkpoints/
 .pytest_cache/
 .venv/
@@ -7,7 +8,6 @@ venv/
 .idea/
 .DS_Store
 
-dados/0_brutos/*.xlsx
-dados/1_processados/*.csv
-dados/2_consumo/*.xlsx
-dados/2_consumo/imagens/*.png
+dados/0_brutos/
+dados/1_processados/
+dados/2_consumo/
